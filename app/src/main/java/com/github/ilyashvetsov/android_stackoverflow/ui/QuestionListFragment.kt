@@ -30,8 +30,8 @@ class QuestionListFragment : Fragment() {
         val adapter = QuestionAdapter()
         recView.adapter = adapter
 
-        viewModel = ViewModelProvider(this, ModelFactory(context!!.applicationContext as App))
-                .get(QuestionViewModel::class.java)
+//        viewModel = ViewModelProvider(this, ModelFactory(context!!.applicationContext as App))
+//                .get(QuestionViewModel::class.java)
 
 
         // Add an observer on the LiveData returned by getAlphabetizedWords.

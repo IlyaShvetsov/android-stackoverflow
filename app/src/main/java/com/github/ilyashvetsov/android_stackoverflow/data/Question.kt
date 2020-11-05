@@ -6,28 +6,23 @@ import androidx.room.PrimaryKey
 
 
 @Entity
-class Question() {
+class Question(
 
-    @PrimaryKey
-    @ColumnInfo(name = "id")
-    var id = 0
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
 
     @ColumnInfo(name = "question_text")
-    var questionText: String? = null
+    var questionText: String? = null,
 
     @ColumnInfo(name = "author")
-    var author: String? = null
+    var author: String? = null,
 
     @ColumnInfo(name = "rating")
-    var rating = 0
+    var rating: Int = 0
 
-    constructor(id: Int, text: String?, author: String?, rating: Int): this() {
-        this.id = id
-        this.questionText = text
-        this.author = author
-        this.rating = rating
-    }
+) {
 
+    // TODO потом удалить
     constructor(text: String?): this() {
         this.questionText = text
     }

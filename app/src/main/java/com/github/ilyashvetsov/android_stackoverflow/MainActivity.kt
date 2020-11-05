@@ -5,16 +5,23 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.ilyashvetsov.android_stackoverflow.data.Question
 import com.github.ilyashvetsov.android_stackoverflow.temp.NewWordActivity
 import com.github.ilyashvetsov.android_stackoverflow.ui.ModelFactory
+import com.github.ilyashvetsov.android_stackoverflow.ui.QuestionAdapter
 import com.github.ilyashvetsov.android_stackoverflow.ui.QuestionListFragment
 import com.github.ilyashvetsov.android_stackoverflow.ui.QuestionViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var viewModel: QuestionViewModel
+    private lateinit var adapter: QuestionAdapter
+
     companion object {
         private const val NEW_WORD_ACTIVITY_REQUEST_CODE = 42
     }
@@ -22,14 +29,24 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, QuestionListFragment())
-                    .commitNow()
-        }
+//        if (savedInstanceState == null) {
+//            supportFragmentManager.beginTransaction()
+//                    .replace(R.id.container, QuestionListFragment())
+//                    .commitNow()
+//        }
 
         viewModel = ViewModelProvider(this, ModelFactory(applicationContext as App))
-                .get(QuestionViewModel::class.java)
+            .get(QuestionViewModel::class.java)
+
+        val recView = findViewById<RecyclerView>(R.id.recView)
+        recView.layoutManager = LinearLayoutManager(this)
+        adapter = QuestionAdapter()
+        try {
+            adapter.insert(viewModel.getQuestions())
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        recView.adapter = adapter
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
@@ -44,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val question = Question(data!!.getStringExtra(NewWordActivity.EXTRA_REPLY))
             viewModel.insert(question)
+            adapter.insert(question)
         }
     }
 

@@ -20,13 +20,16 @@ class ModelFactory(private val application: App) : NewInstanceFactory() {
 
 class QuestionViewModel(application: App) : AndroidViewModel(application) {
     private val repository: AppRepository = AppRepository(application)
-    val allQuestions: LiveData<List<Question>> = repository.allQuestions
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */
     fun insert(question: Question) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(question)
+    }
+
+    fun getQuestions(): List<Question> {
+        return repository.getQuestions()
     }
 
 }
