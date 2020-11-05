@@ -18,6 +18,6 @@ interface QuestionDao {
     fun insertQuestion(question: Question)
 
     @Query("select * from Question")
-    fun getQuestions(): List<Question>
+    fun getQuestions(): LiveData<List<Question>>
 
 }

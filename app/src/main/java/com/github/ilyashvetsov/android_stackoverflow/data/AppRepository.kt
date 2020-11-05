@@ -1,12 +1,14 @@
 package com.github.ilyashvetsov.android_stackoverflow.data
 
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
 import com.github.ilyashvetsov.android_stackoverflow.App
 import com.github.ilyashvetsov.android_stackoverflow.data.local.QuestionDao
 
 
 class AppRepository(application: App) {
     private val questionDao: QuestionDao = application.questionsDatabase!!.questionsDao
+    val allQuestions: LiveData<List<Question>> = questionDao.getQuestions()
 
     // You must call this on a non-UI thread or your app will crash. So we're making this a
     // suspend function so the caller methods know this.
@@ -25,10 +27,10 @@ class AppRepository(application: App) {
         questionDao.insertQuestion(question)
     }
 
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
-     fun getQuestions(): List<Question> { // TODO suspend
-        return questionDao.getQuestions()
-    }
+//    @Suppress("RedundantSuspendModifier")
+//    @WorkerThread
+//     fun getQuestions(): LiveData<List<Question>> { // TODO suspend
+//        return questionDao.getQuestions()
+//    }
 
 }

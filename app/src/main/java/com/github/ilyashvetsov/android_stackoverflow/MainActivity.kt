@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -41,12 +42,11 @@ class MainActivity : AppCompatActivity() {
         val recView = findViewById<RecyclerView>(R.id.recView)
         recView.layoutManager = LinearLayoutManager(this)
         adapter = QuestionAdapter()
-        try {
-            adapter.insert(viewModel.getQuestions())
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
         recView.adapter = adapter
+
+        viewModel.allQuestions.observe(this, {
+            adapter.setAll(it)
+        })
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
@@ -61,7 +61,6 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val question = Question(data!!.getStringExtra(NewWordActivity.EXTRA_REPLY))
             viewModel.insert(question)
-            adapter.insert(question)
         }
     }
 
