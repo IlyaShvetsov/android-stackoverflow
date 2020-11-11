@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.ilyashvetsov.android_stackoverflow.R
-import com.github.ilyashvetsov.android_stackoverflow.data.Question
+import com.github.ilyashvetsov.android_stackoverflow.data.model.Question
 
 
 class QuestionAdapter : RecyclerView.Adapter<QuestionViewHolder>() {
@@ -13,15 +13,7 @@ class QuestionAdapter : RecyclerView.Adapter<QuestionViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.question_item, parent, false)
-        val holder = QuestionViewHolder(view)
-
-        view.setOnClickListener {
-            val position: Int = holder.adapterPosition
-            dataList.removeAt(position)
-            notifyDataSetChanged()
-        }
-
-        return holder
+        return QuestionViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {

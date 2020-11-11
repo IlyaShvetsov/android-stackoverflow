@@ -1,4 +1,4 @@
-package com.github.ilyashvetsov.android_stackoverflow.data
+package com.github.ilyashvetsov.android_stackoverflow.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

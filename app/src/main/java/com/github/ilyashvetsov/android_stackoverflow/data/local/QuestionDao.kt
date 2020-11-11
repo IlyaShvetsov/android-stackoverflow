@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.github.ilyashvetsov.android_stackoverflow.data.Question
+import com.github.ilyashvetsov.android_stackoverflow.data.model.Question
 
 
 @Dao

@@ -2,7 +2,7 @@ package com.github.ilyashvetsov.android_stackoverflow.data.local;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
-import com.github.ilyashvetsov.android_stackoverflow.data.Question;
+import com.github.ilyashvetsov.android_stackoverflow.data.model.Question;
 
 
 @Database(entities = {Question.class}, version = 2)
