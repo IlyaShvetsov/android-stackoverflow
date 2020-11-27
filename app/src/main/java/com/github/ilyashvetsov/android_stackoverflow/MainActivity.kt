@@ -1,28 +1,21 @@
 package com.github.ilyashvetsov.android_stackoverflow
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.ilyashvetsov.android_stackoverflow.data.model.Question
-import com.github.ilyashvetsov.android_stackoverflow.temp.NewWordActivity
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.ilyashvetsov.android_stackoverflow.ui.ModelFactory
 import com.github.ilyashvetsov.android_stackoverflow.ui.QuestionAdapter
 import com.github.ilyashvetsov.android_stackoverflow.ui.QuestionViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class MainActivity : AppCompatActivity() {
 
+class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var viewModel: QuestionViewModel
     private lateinit var adapter: QuestionAdapter
-
-    companion object {
-        private const val NEW_WORD_ACTIVITY_REQUEST_CODE = 42
-    }
+    private var container: SwipeRefreshLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,22 +31,16 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.allQuestions.observe(this, {
             adapter.setAll(it)
+            container?.isRefreshing = false
         })
+        viewModel.updateData()
 
-        val fab = findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener {
-            val intent = Intent(this@MainActivity, NewWordActivity::class.java)
-            startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE)
-        }
-
+        container = findViewById(R.id.container)
+        container?.setOnRefreshListener(this)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val question = Question(data!!.getStringExtra(NewWordActivity.EXTRA_REPLY))
-            viewModel.insert(question)
-        }
+    override fun onRefresh() {
+        viewModel.updateData()
     }
 
 }

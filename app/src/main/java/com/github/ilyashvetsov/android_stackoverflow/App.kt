@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.github.ilyashvetsov.android_stackoverflow.data.local.AppDatabase
 
 
+
 class App : Application() {
     var questionsDatabase: AppDatabase? = null
     private set

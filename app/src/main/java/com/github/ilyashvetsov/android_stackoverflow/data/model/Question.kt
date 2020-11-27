@@ -5,11 +5,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
+
 @Entity
 class Question(
 
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    @PrimaryKey(autoGenerate = false)
+    var id: Int = 0,
 
     @ColumnInfo(name = "question_text")
     var questionText: String? = null,
@@ -23,7 +24,8 @@ class Question(
 ) {
 
     // TODO потом удалить
-    constructor(text: String?): this() {
+    constructor(id: Int, text: String?): this() {
+        this.id = id
         this.questionText = text
     }
 

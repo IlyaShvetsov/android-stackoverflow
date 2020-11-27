@@ -7,6 +7,7 @@ import com.github.ilyashvetsov.android_stackoverflow.R
 import com.github.ilyashvetsov.android_stackoverflow.data.model.Question
 
 
+
 class QuestionViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val textView: TextView = itemView.findViewById(R.id.questionTextView)
 

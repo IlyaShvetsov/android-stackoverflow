@@ -1,15 +1,13 @@
 package com.github.ilyashvetsov.android_stackoverflow.ui
 
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import androidx.lifecycle.ViewModelProvider.NewInstanceFactory
-import androidx.lifecycle.viewModelScope
 import com.github.ilyashvetsov.android_stackoverflow.App
-import com.github.ilyashvetsov.android_stackoverflow.data.AppRepository
+import com.github.ilyashvetsov.android_stackoverflow.data.Repository
 import com.github.ilyashvetsov.android_stackoverflow.data.model.Question
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 
 class ModelFactory(private val application: App) : NewInstanceFactory() {
@@ -19,16 +17,12 @@ class ModelFactory(private val application: App) : NewInstanceFactory() {
 }
 
 class QuestionViewModel(application: App) : AndroidViewModel(application) {
-    private val repository: AppRepository = AppRepository(application)
+    private val repository: Repository = Repository(application)
     val allQuestions: LiveData<List<Question>> = repository.allQuestions
 
     /** Launching a new coroutine to insert the data in a non-blocking way */
-    fun insert(question: Question) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insert(question)
+    fun updateData() = viewModelScope.launch(Dispatchers.IO) {
+        repository.updateData()
     }
-
-//    fun getQuestions(): List<Question> {
-//        return repository.getQuestions()
-//    }
 
 }

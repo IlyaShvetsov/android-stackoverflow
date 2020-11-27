@@ -8,6 +8,7 @@ import androidx.room.Query
 import com.github.ilyashvetsov.android_stackoverflow.data.model.Question
 
 
+
 @Dao
 interface QuestionDao {
 
@@ -18,6 +19,6 @@ interface QuestionDao {
     fun insertQuestion(question: Question)
 
     @Query("select * from Question")
-    fun getQuestions(): LiveData<List<Question>>
+    fun getQuestions(): List<Question>
 
 }

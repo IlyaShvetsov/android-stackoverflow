@@ -7,6 +7,7 @@ import com.github.ilyashvetsov.android_stackoverflow.R
 import com.github.ilyashvetsov.android_stackoverflow.data.model.Question
 
 
+
 class QuestionAdapter : RecyclerView.Adapter<QuestionViewHolder>() {
     private val dataList: ArrayList<Question> = ArrayList()
 

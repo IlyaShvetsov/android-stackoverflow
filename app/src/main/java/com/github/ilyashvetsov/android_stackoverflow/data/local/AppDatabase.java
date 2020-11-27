@@ -5,7 +5,8 @@ import androidx.room.RoomDatabase;
 import com.github.ilyashvetsov.android_stackoverflow.data.model.Question;
 
 
-@Database(entities = {Question.class}, version = 2)
+
+@Database(entities = {Question.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract QuestionDao getQuestionsDao();
 }
