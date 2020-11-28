@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">android-stackoverflow</string>
+    <string name="error_text">Возникли проблемы с интернет соединением</string>
 </resources>

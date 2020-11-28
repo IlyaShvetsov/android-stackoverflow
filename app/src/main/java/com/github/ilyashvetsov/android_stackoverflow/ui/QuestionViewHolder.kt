@@ -9,10 +9,14 @@ import com.github.ilyashvetsov.android_stackoverflow.data.model.Question
 
 
 class QuestionViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-    private val textView: TextView = itemView.findViewById(R.id.questionTextView)
+    private val titleTextView: TextView = itemView.findViewById(R.id.question_title)
+    private val authorTextView: TextView = itemView.findViewById(R.id.question_author)
+    private val ratingTextView: TextView = itemView.findViewById(R.id.question_rating)
 
     fun bind(question: Question) {
-        textView.text = question.questionText
+        titleTextView.text = question.title
+        authorTextView.text = question.author
+        ratingTextView.text = question.rating.toString()
     }
 
 }

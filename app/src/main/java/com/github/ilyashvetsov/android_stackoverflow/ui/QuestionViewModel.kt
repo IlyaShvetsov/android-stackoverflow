@@ -19,10 +19,13 @@ class ModelFactory(private val application: App) : NewInstanceFactory() {
 class QuestionViewModel(application: App) : AndroidViewModel(application) {
     private val repository: Repository = Repository(application)
     val allQuestions: LiveData<List<Question>> = repository.allQuestions
+    val showError = MutableLiveData<Boolean>().apply {
+        value = false
+    }
 
     /** Launching a new coroutine to insert the data in a non-blocking way */
     fun updateData() = viewModelScope.launch(Dispatchers.IO) {
-        repository.updateData()
+        showError.postValue(!repository.updateData())
     }
 
 }

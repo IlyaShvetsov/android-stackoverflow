@@ -15,15 +15,20 @@ class Repository(application: App) {
         value = mutableListOf()
     }
 
+    /** Возвращает false, если БД пуста и нет интернета */
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun updateData() {
+    suspend fun updateData(): Boolean {
         try {
             val questions = StackOverflowAPI.getQuestions()
             allQuestions.postValue(questions)
             questionDao.insertQuestions(questions)
+            return true
         } catch (e: Exception) {
-            allQuestions.postValue(questionDao.getQuestions())
+            val questions = questionDao.getQuestions()
+            if (questions.isEmpty()) return false
+            allQuestions.postValue(questions)
+            return true
         }
     }
 

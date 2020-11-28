@@ -8,18 +8,33 @@ import okhttp3.Request
 
 
 object StackOverflowAPI {
+    private const val API_URL = "https://api.stackexchange.com/2.2"
+    private const val QUESTION_REQ = "/questions?" +
+            "page=1" + "&" +
+            "pagesize=100" + "&" +
+            "order=asc" + "&" +
+            "sort=creation" + "&" +
+            "tagged=android" + "&" +
+            "site=stackoverflow" + "&" +
+            "filter=withbody"
 
     fun getQuestions(): List<Question> {
         val request = Request.Builder()
-            .url("https://api.stackexchange.com/2.2/questions?order=asc&sort=creation&tagged=android&site=stackoverflow")
+            .url(API_URL + QUESTION_REQ)
             .build()
         val response = OkHttpClient().newCall(request).execute()
         val responseBody = response.body()!!.string()
 
         val list = Gson().fromJson(responseBody, ParsedJsonFile::class.java)
         val answer = ArrayList<Question>()
-        for (question in list.items) {
-            answer.add(Question(question.question_id, question.title))
+        for (item in list.items) {
+            answer.add(Question(
+                    item.question_id,
+                    item.title,
+                    item.body,
+                    item.owner.display_name,
+                    item.score
+            ))
         }
 
         return answer

@@ -12,8 +12,11 @@ class Question(
     @PrimaryKey(autoGenerate = false)
     var id: Int = 0,
 
-    @ColumnInfo(name = "question_text")
-    var questionText: String? = null,
+    @ColumnInfo(name = "title")
+    var title: String? = null,
+
+    @ColumnInfo(name = "text")
+    var text: String? = null,
 
     @ColumnInfo(name = "author")
     var author: String? = null,
@@ -21,12 +24,4 @@ class Question(
     @ColumnInfo(name = "rating")
     var rating: Int = 0
 
-) {
-
-    // TODO потом удалить
-    constructor(id: Int, text: String?): this() {
-        this.id = id
-        this.questionText = text
-    }
-
-}
+)
