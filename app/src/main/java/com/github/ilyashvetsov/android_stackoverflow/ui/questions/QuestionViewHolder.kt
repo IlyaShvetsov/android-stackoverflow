@@ -1,4 +1,4 @@
-package com.github.ilyashvetsov.android_stackoverflow.ui
+package com.github.ilyashvetsov.android_stackoverflow.ui.questions
 
 import android.view.View
 import android.widget.TextView
@@ -8,7 +8,7 @@ import com.github.ilyashvetsov.android_stackoverflow.data.model.Question
 
 
 
-class QuestionViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class QuestionViewHolder(itemView: View, private val onClick : (Question) -> Unit): RecyclerView.ViewHolder(itemView) {
     private val titleTextView: TextView = itemView.findViewById(R.id.question_title)
     private val authorTextView: TextView = itemView.findViewById(R.id.question_author)
     private val ratingTextView: TextView = itemView.findViewById(R.id.question_rating)
@@ -17,6 +17,9 @@ class QuestionViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         titleTextView.text = question.title
         authorTextView.text = question.author
         ratingTextView.text = question.rating.toString()
+        itemView.setOnClickListener {
+            onClick(question)
+        }
     }
 
 }

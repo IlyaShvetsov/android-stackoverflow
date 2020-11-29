@@ -1,4 +1,4 @@
-package com.github.ilyashvetsov.android_stackoverflow.ui
+package com.github.ilyashvetsov.android_stackoverflow.ui.questions
 
 import androidx.lifecycle.*
 import androidx.lifecycle.ViewModelProvider.NewInstanceFactory

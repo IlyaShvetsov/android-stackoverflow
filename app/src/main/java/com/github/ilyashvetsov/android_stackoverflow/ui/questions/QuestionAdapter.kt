@@ -1,4 +1,4 @@
-package com.github.ilyashvetsov.android_stackoverflow.ui
+package com.github.ilyashvetsov.android_stackoverflow.ui.questions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,13 +8,13 @@ import com.github.ilyashvetsov.android_stackoverflow.data.model.Question
 
 
 
-class QuestionAdapter : RecyclerView.Adapter<QuestionViewHolder>() {
+class QuestionAdapter(private val onClick : (Question) -> Unit) : RecyclerView.Adapter<QuestionViewHolder>() {
     private val dataList: ArrayList<Question> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.question_item, parent, false)
-        return QuestionViewHolder(view)
+        return QuestionViewHolder(view, onClick)
     }
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
