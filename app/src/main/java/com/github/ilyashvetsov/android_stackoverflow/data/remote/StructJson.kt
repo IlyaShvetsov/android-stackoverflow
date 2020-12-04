@@ -14,6 +14,19 @@ internal class QuestionItem {
     var score: Int = 0
 }
 
-internal class ParsedJsonFile {
+internal class QuestionsList {
     internal var items = mutableListOf<QuestionItem>()
 }
+
+
+
+internal class AnswerItem {
+    var answer_id: Int = 0
+    lateinit var body: String
+    var score: Int = 0
+}
+
+internal class AnswersList {
+    internal var items = mutableListOf<AnswerItem>()
+}
+

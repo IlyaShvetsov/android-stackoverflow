@@ -44,7 +44,7 @@ class QuestionsListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel = ViewModelProvider(this, ModelFactory(requireContext().applicationContext as App))
+        viewModel = ViewModelProvider(this, QuestionModelFactory(requireContext().applicationContext as App))
                 .get(QuestionViewModel::class.java)
 
         adapter = QuestionAdapter { question ->
