@@ -3,8 +3,8 @@ package com.github.ilyashvetsov.android_stackoverflow.ui.questions
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.github.ilyashvetsov.android_stackoverflow.R
 import com.github.ilyashvetsov.android_stackoverflow.data.model.Question
+import com.github.ilyashvetsov.android_stackoverflow.databinding.QuestionItemBinding
 
 
 
@@ -13,8 +13,8 @@ class QuestionAdapter(private val onClick : (Question) -> Unit) : RecyclerView.A
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.question_item, parent, false)
-        return QuestionViewHolder(view, onClick)
+        val questionItemBinding = QuestionItemBinding.inflate(inflater, parent, false)
+        return QuestionViewHolder(questionItemBinding, onClick)
     }
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {

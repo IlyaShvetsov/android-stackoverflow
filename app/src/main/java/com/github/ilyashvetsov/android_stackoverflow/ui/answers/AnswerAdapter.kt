@@ -3,8 +3,8 @@ package com.github.ilyashvetsov.android_stackoverflow.ui.answers
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.github.ilyashvetsov.android_stackoverflow.R
 import com.github.ilyashvetsov.android_stackoverflow.data.model.Answer
+import com.github.ilyashvetsov.android_stackoverflow.databinding.AnswerItemBinding
 
 
 
@@ -13,8 +13,8 @@ class AnswerAdapter : RecyclerView.Adapter<AnswerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnswerViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.answer_item, parent, false)
-        return AnswerViewHolder(view)
+        val answerItemBinding = AnswerItemBinding.inflate(inflater, parent, false)
+        return AnswerViewHolder(answerItemBinding)
     }
 
     override fun onBindViewHolder(holder: AnswerViewHolder, position: Int) {
