@@ -17,7 +17,7 @@
 
             <TextView
                 android:id="@+id/question_title"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:padding="8dp"
@@ -31,7 +31,7 @@
 
             <TextView
                 android:id="@+id/question_text"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:padding="8dp"
@@ -42,42 +42,36 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Question text" />
 
-            <LinearLayout
-                android:id="@+id/linear_layout"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/question_author"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_margin="5dp"
+                android:textSize="14sp"
+                android:gravity="end"
                 app:layout_constraintTop_toBottomOf="@id/question_text"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintEnd_toStartOf="@id/question_rating"
+                tools:text="author"/>
 
-                <TextView
-                    android:id="@+id/question_author"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp"
-                    android:textSize="14sp"
-                    android:gravity="end"
-                    tools:text="author"/>
-
-                <TextView
-                    android:id="@+id/question_rating"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp"
-                    android:textSize="14sp"
-                    android:gravity="end"
-                    tools:text="100"/>
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/question_rating"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textSize="14sp"
+                android:gravity="end"
+                app:layout_constraintTop_toBottomOf="@id/question_text"
+                app:layout_constraintStart_toEndOf="@id/question_author"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="100"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rec_view"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/linear_layout"
+                app:layout_constraintTop_toBottomOf="@id/question_author"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:listitem="@layout/answer_item"/>
@@ -87,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="invisible"
-                app:layout_constraintTop_toBottomOf="@id/linear_layout"
+                app:layout_constraintTop_toBottomOf="@id/question_author"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -98,7 +92,7 @@
                 android:layout_gravity="center"
                 android:text="@string/error_text"
                 android:visibility="invisible"
-                app:layout_constraintTop_toBottomOf="@id/linear_layout"
+                app:layout_constraintTop_toBottomOf="@id/question_author"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 

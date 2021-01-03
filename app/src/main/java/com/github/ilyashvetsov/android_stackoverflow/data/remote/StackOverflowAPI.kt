@@ -33,7 +33,7 @@ object StackOverflowAPI {
                 .url(API_URL + QUESTION_REQ)
                 .build()
         val response = OkHttpClient().newCall(request).execute()
-        val responseBody = response.body()!!.string()
+        val responseBody = response.body()?.string() ?: throw Exception("Response body is null")
 
         val list = Gson().fromJson(responseBody, QuestionsList::class.java)
         val result = ArrayList<Question>()
@@ -55,7 +55,7 @@ object StackOverflowAPI {
                 .url(API_URL + ANSWER_REQ(questionId))
                 .build()
         val response = OkHttpClient().newCall(request).execute()
-        val responseBody = response.body()!!.string()
+        val responseBody = response.body()?.string() ?: throw Exception("Response body is null")
 
         val list = Gson().fromJson(responseBody, AnswersList::class.java)
         val result = ArrayList<Answer>()
